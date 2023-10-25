@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Image, View, Pressable } from "react-native";
+import { StyleSheet, Image, Pressable } from "react-native";
 
 const CustomButton = ({ source, onPress }) => {
   return (

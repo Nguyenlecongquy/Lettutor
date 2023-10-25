@@ -3,9 +3,6 @@ import {
   Text,
   View,
   Linking,
-  TextInput,
-  Pressable,
-  Alert,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
@@ -17,7 +14,7 @@ const facebookImg = require('../../assets/logo/facebook-logo.3bac8064.png')
 const googleImg = require('../../assets/logo/google-logo.5f53496e.png')
 const phoneImg = require('../../assets/logo/mobile-logo.8ef12de5.png')
 
-export default function LoginForm() {
+export default function Form({form}) {
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data) => console.log(data);
@@ -53,7 +50,7 @@ export default function LoginForm() {
         Forgot Password?
       </Text>
 
-      <CustomSubmit label="LOG IN" onSubmit={handleSubmit(onSubmit)}/>
+      <CustomSubmit label={form} onSubmit={handleSubmit(onSubmit)}/>
       <Text style={{textAlign: 'center', marginVertical: 15}}>
         Or continue with
       </Text>
@@ -63,13 +60,24 @@ export default function LoginForm() {
         <CustomButton source={googleImg}/>
         <CustomButton source={phoneImg}/>
       </View>
-
-      <Text style={{textAlign: 'center', marginVertical: 15}}>
+      
+      {form == 'LOG IN' && (
+        <Text style={{textAlign: 'center', marginVertical: 15}}>
         Not a member yet?
         <Text style={{color: '#008fff', marginBottom: 5}}
           onPress={() => Linking.openURL('http://google.com')}>
           Sign up</Text>
       </Text>
+      )}
+      {form == 'SIGN UP' && (
+        <Text style={{textAlign: 'center', marginVertical: 15}}>
+        Already have an account?
+        <Text style={{color: '#008fff', marginBottom: 5}}
+          onPress={() => Linking.openURL('http://google.com')}>
+          Log in</Text>
+      </Text>
+      )}
+
     </View>
   );
 }
