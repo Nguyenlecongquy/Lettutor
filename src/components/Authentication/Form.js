@@ -10,9 +10,9 @@ import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
 import CustomButton from "./CustomButton";
 
-const facebookImg = require('../../assets/logo/facebook-logo.3bac8064.png')
-const googleImg = require('../../assets/logo/google-logo.5f53496e.png')
-const phoneImg = require('../../assets/logo/mobile-logo.8ef12de5.png')
+const facebookImg = require('../../../assets/logo/facebook-logo.3bac8064.png')
+const googleImg = require('../../../assets/logo/google-logo.5f53496e.png')
+const phoneImg = require('../../../assets/logo/mobile-logo.8ef12de5.png')
 
 export default function Form({form}) {
   const { control, handleSubmit } = useForm();

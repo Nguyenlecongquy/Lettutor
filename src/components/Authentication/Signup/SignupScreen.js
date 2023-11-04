@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Image, ScrollView, Pressable, Text } from "react-native";
-import Form from '../components/Form'
+import Form from '../Form'
 
-const LoginImage = require("../../assets/login/login.png");
-const Logo = require("../../assets/logo/lettutor_logo.png");
-const Language = require("../../assets/logo/vietnam.3745180b.png");
+const LoginImage = require("../../../../assets/login/login.png");
+const Logo = require("../../../../assets/logo/lettutor_logo.png");
+const Language = require("../../../../assets/logo/vietnam.3745180b.png");
 
-const LoginScreen = () => {
+const SignupScreen = () => {
   return (
     <View style={styles.container}>
     
@@ -28,9 +28,9 @@ const LoginScreen = () => {
           <Image source={LoginImage} style={styles.LoginImage} />
         </View>
         <View style={styles.formContainer}>
-          <Text style={styles.Greeting}>Say hello to your English tutors</Text>
+          <Text style={styles.Greeting}>Start learning with LetTutor</Text>
           <Text style={styles.Intro}>Become fluent faster through one on one video chat lessons tailored to your goals.</Text>
-          <Form form='LOG IN'/>
+          <Form form='SIGN UP'/>
         </View>
       </ScrollView>
       
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     height: '90%',
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: 10,
   },
   languageButtonContainer: {
     width: '15%',
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoButton: {
-    width: '95%',
+    width: '90%',
     height: '90%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -124,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;
