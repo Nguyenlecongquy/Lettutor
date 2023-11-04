@@ -10,7 +10,7 @@ const RenderTutor = (props) => {
     <View style={styles.container}>
       <View style={{ width: "100%", alignItems: "center" }}>
         <Image
-          source={require("../../../../assets/listTutor/000001.jpg")}
+          source={require("../../../../../assets/listTutor/000001.jpg")}
           style={styles.avatar}
         />
       </View>

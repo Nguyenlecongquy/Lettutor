@@ -1,9 +1,9 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
-import RenderBtnPage from "./RenderBtnPage";
+import RenderBtnPage from "../Tutor/ChildComponents/Tutor/RenderBtnPage";
 
 const PageSegmentation = () => {
-const listPage = ['<' ,'1', '2', '3', '4', '5', '6', '>']
+const listPage = ['<' ,'1', '2', '3', '4', '>']
 
   return (
     <View style={styles.container}>
