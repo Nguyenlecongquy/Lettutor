@@ -1,12 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Image, ScrollView, Pressable, Text } from "react-native";
+import { StyleSheet, View, Image, ScrollView, Pressable, Text, Dimensions } from "react-native";
 import Form from '../Form'
 
 const LoginImage = require("../../../../assets/login/login.png");
 const Logo = require("../../../../assets/logo/lettutor_logo.png");
 const Language = require("../../../../assets/logo/vietnam.3745180b.png");
 
-const SignupScreen = () => {
+const windowHeight = Dimensions.get('window').height
+
+const SignupScreen = (props) => {
   return (
     <View style={styles.container}>
     
@@ -30,7 +32,7 @@ const SignupScreen = () => {
         <View style={styles.formContainer}>
           <Text style={styles.Greeting}>Start learning with LetTutor</Text>
           <Text style={styles.Intro}>Become fluent faster through one on one video chat lessons tailored to your goals.</Text>
-          <Form form='SIGN UP'/>
+          <Form form='SIGN UP' navigation={props.navigation}/>
         </View>
       </ScrollView>
       
@@ -44,10 +46,10 @@ const styles = StyleSheet.create({
   },
   head: {
     width: "100%",
-    height: '6%',
+    height: 50,
     position: "absolute",
     left: 0,
-    top: '5%',
+    top: 0,
     flexDirection: "row",
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -91,10 +93,10 @@ const styles = StyleSheet.create({
   },
   body: {
     width: "100%",
-    height: "89%",
+    height: windowHeight - 100,
     position: "absolute",
     left: 0,
-    top: "11%",
+    top: 50,
     backgroundColor: "#fff",
   },
   LoginImageContainer: {

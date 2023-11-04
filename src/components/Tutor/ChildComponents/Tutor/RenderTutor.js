@@ -6,17 +6,26 @@ import { MaterialIcons } from "@expo/vector-icons";
 import RenderTag from "./RenderTag";
 
 const RenderTutor = (props) => {
+  const moveToTutorDetail = () => {
+    props.navigation.navigate("TutorDetail");
+  };
+
   return (
     <View style={styles.container}>
       <View style={{ width: "100%", alignItems: "center" }}>
-        <Image
-          source={require("../../../../../assets/listTutor/000001.jpg")}
-          style={styles.avatar}
-        />
+        <Pressable onPress={moveToTutorDetail}>
+          <Image
+            source={require("../../../../../assets/listTutor/000001.jpg")}
+            style={styles.avatar}
+          />
+        </Pressable>
       </View>
 
       <Feather name="heart" size={24} color="blue" style={styles.heart} />
-      <Text style={styles.name}>{props.name}</Text>
+      <Pressable onPress={moveToTutorDetail}>
+        <Text style={styles.name}>{props.name}</Text>
+      </Pressable>
+
       <View style={{ flexDirection: "row" }}>
         <Image source={{ uri: props.nationalityFlag }} style={styles.flag} />
         <Text>{props.nationality}</Text>
@@ -34,7 +43,7 @@ const RenderTutor = (props) => {
         ))}
       </View>
       <Text>{props.introduce}</Text>
-      <View style={{width: '100%', alignItems: 'flex-end'}}>
+      <View style={{ width: "100%", alignItems: "flex-end" }}>
         <Pressable style={styles.book}>
           <MaterialIcons name="call-to-action" size={24} color="blue" />
           <Text style={styles.bookText}>Book</Text>
