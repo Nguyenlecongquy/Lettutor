@@ -11,13 +11,12 @@ import Gift from "../Common/Gift";
 import Message from "../Common/Message";
 import Header from "../Common/Header";
 import Introduce from "./ChildComponents/Introduce";
-import LastestBook from "./ChildComponents/LastestBook";
 import PageSegmentation from "../Common/PageSegmentation";
 import ListClass from "./ChildComponents/ListClass";
 
 const windowHeight = Dimensions.get("window").height;
 
-const ScheduleScreen = (props) => {
+const HistoryScreen = (props) => {
   const listClass = [
     {
       key: 1,
@@ -25,6 +24,7 @@ const ScheduleScreen = (props) => {
         date: "Sun, 26 Nov 23",
         time: "00:30 - 00:55",
         lesson: '1 lesson',
+        timePass: '16 hours ago',
         avatar:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Style_-_Wouldn%27t_It_Be_Nice.png/450px-Style_-_Wouldn%27t_It_Be_Nice.png",
         name: "Keegan",
@@ -41,6 +41,7 @@ const ScheduleScreen = (props) => {
         date: "Mon, 27 Nov 23",
         time: "02:00 - 02:35",
         lesson: '1 lesson',
+        timePass: '16 hours ago',
         avatar:
           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Style_-_Wouldn%27t_It_Be_Nice.png/450px-Style_-_Wouldn%27t_It_Be_Nice.png",
         name: "Keegan",
@@ -60,7 +61,6 @@ const ScheduleScreen = (props) => {
       <Header />
       <ScrollView style={styles.body}>
         <Introduce />
-        <LastestBook />
         <ListClass data={listClass} />
         <PageSegmentation />
       </ScrollView>
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ScheduleScreen;
+export default HistoryScreen;

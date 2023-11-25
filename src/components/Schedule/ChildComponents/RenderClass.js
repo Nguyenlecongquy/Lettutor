@@ -2,31 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import DateLesson from "./DateLesson";
+import TeacherInfor from "./TeacherInfor";
 
 const RenderClass = (props) => {
   data = props.data;
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, fontWeight: "bold" }}>{data.date}</Text>
-      <Text>{data.lesson} lesson</Text>
-
-      <View style={styles.teacherInfor}>
-        <Image source={{ uri: data.avatar }} style={styles.avatar} />
-        <View style={styles.infor}>
-          <Text style={{ fontSize: 18, fontWeight: "500" }}>{data.name}</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Image
-              source={{ uri: data.countryImg }}
-              style={styles.countryImg}
-            />
-            <Text>Tuni</Text>
-          </View>
-          <View style={{ flexDirection: "row" }}>
-            <AntDesign name="message1" size={18} color="#00f" />
-            <Text style={{ color: "#00f", marginLeft: 5 }}>Direct Message</Text>
-          </View>
-        </View>
-      </View>
+      <DateLesson date={data.date} extra={data.lesson}/>
+      <TeacherInfor data={data}/>
 
       <View style={styles.detail}>
         <View style={styles.time}>

@@ -6,6 +6,7 @@ import Tutor from "./src/components/Tutor/Tutor";
 import LoginScreen from "./src/components/Authentication/Login/LoginScreen";
 import SignupScreen from "./src/components/Authentication/Signup/SignupScreen";
 import ScheduleScreen from "./src/components/Schedule/ScheduleScreen";
+import HistoryScreen from "./src/components/History/HistoryScreen";
 import { Provider } from "react-redux";
 import { Store } from "./src/redux/store";
 
@@ -41,9 +42,13 @@ export default function App() {
             component={ScheduleScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="HistoryScreen"
+            component={HistoryScreen}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
-
   );
 }
