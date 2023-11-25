@@ -4,12 +4,10 @@ import {
   Text,
   View,
   TextInput,
-  Pressable,
-  Button,
-  Alert,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setEmail, setPassword } from "../../redux/actions";
 const CustomInput = ({
   control,
   name,
@@ -18,9 +16,20 @@ const CustomInput = ({
   placeholder,
   secureTextEntry,
 }) => {
+
   const {
     formState: { errors },
   } = useForm();
+  const {register} = useForm()
+
+  const { email, password } = useSelector((state) => state.userReducer);
+  const changeUserValue = (value) => {
+    if (name == 'email')
+      useDispatch(setEmail(value))
+    else
+      useDispatch(setPassword(value))
+  }
+
   return (
     <Controller
       name={name}
@@ -42,7 +51,6 @@ const CustomInput = ({
               secureTextEntry={secureTextEntry}
               style={styles.input}
             />
-            {errors.firstName && <Text>This is required.</Text>}
           </View>
           {error && (
             <Text style={{color: 'red', alignSelf: 'stretch'}}>{error.message || 'Required'}</Text>

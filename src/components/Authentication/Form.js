@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, Linking, Alert } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-
 import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
 import CustomButton from "./CustomButton";
-
+import { useSelector, useDispatch } from "react-redux";
 const facebookImg = require("../../../assets/logo/facebook-logo.3bac8064.png");
 const googleImg = require("../../../assets/logo/google-logo.5f53496e.png");
 const phoneImg = require("../../../assets/logo/mobile-logo.8ef12de5.png");
@@ -13,14 +12,16 @@ export default function Form(props) {
   const form = props.form;
   const { control, handleSubmit } = useForm();
 
+  const { email, password } = useSelector((state) => state.userReducer);
+
   const onSubmit = (data) => {
+    console.log({ email });
     if (form == "LOG IN") {
       Alert.alert("Log in Success!");
-      props.navigation.navigate("Tutor")
-    }
-    else {
+      props.navigation.navigate("Tutor");
+    } else {
       Alert.alert("Sign up Success!");
-      props.navigation.navigate("LoginScreen")
+      props.navigation.navigate("LoginScreen");
     }
   };
 
@@ -35,8 +36,9 @@ export default function Form(props) {
             value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
             message: "Email is not valid",
           },
+          required: true,
         }}
-        placeholder="mail@example.comaaaa"
+        placeholder="mail@example.com"
       />
       <CustomInput
         name="password"
@@ -47,17 +49,22 @@ export default function Form(props) {
             value: 6,
             message: "Password should be minimum 6 characters long",
           },
+          required: true,
         }}
         placeholder="123456"
       />
-      <Text
-        style={{ color: "#008fff", marginBottom: 5 }}
-        onPress={() => Linking.openURL("http://google.com")}
-      >
-        Forgot Password?
-      </Text>
+
+      {form == "LOG IN" && (
+        <Text
+          style={{ color: "#008fff", marginBottom: 5 }}
+          onPress={() => Linking.openURL("http://google.com")}
+        >
+          Forgot Password?
+        </Text>
+      )}
 
       <CustomSubmit label={form} onSubmit={handleSubmit(onSubmit)} />
+
       <Text style={{ textAlign: "center", marginVertical: 15 }}>
         Or continue with
       </Text>
@@ -69,22 +76,26 @@ export default function Form(props) {
       </View>
 
       {form == "LOG IN" && (
-        <Text style={{ textAlign: "center", marginVertical: 15, marginBottom: 80}}>
+        <Text
+          style={{ textAlign: "center", marginVertical: 15, marginBottom: 80 }}
+        >
           Not a member yet?
           <Text
             style={{ color: "#008fff", marginBottom: 5 }}
-            onPress={() => Linking.openURL("http://google.com")}
+            onPress={() => props.navigation.navigate("SignupScreen")}
           >
             Sign up
           </Text>
         </Text>
       )}
       {form == "SIGN UP" && (
-        <Text style={{ textAlign: "center", marginVertical: 15, marginBottom: 80 }}>
+        <Text
+          style={{ textAlign: "center", marginVertical: 15, marginBottom: 80 }}
+        >
           Already have an account?
           <Text
             style={{ color: "#008fff", marginBottom: 5 }}
-            onPress={() => Linking.openURL("http://google.com")}
+            onPress={() => props.navigation.navigate("LoginScreen")}
           >
             Log in
           </Text>

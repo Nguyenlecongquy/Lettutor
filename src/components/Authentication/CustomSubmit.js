@@ -17,16 +17,14 @@ const styles = StyleSheet.create({
     borderColor: "#008fff",
     borderWidth: 1,
     borderRadius: 5,
-    paddingHorizontal: 10,
     marginVertical: 5,
-    textAlign: "center",
     alignItems: "center",
+    justifyContent: 'center',
   },
   TextSubmit: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
-    textAlign: "center",
   },
 });
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, View, StyleSheet, TouchableHighlight } from 'react-native'
 import { AntDesign } from "@expo/vector-icons";
 
-const Language = require("../../../assets/logo/vietnam.3745180b.png");
+const Language = require("../../../assets/logo/united-states.eb0c11f1.png");
 
 const CircleButton = (props) => {
   if (props.type == 'language')

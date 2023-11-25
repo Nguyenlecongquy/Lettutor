@@ -34,3 +34,7 @@ debug.log
 
 # typescript
 *.tsbuildinfo
+
+
+# Contentlayer
+.contentlayer
