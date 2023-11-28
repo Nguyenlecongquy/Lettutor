@@ -7,6 +7,7 @@ import LoginScreen from "./src/components/Authentication/Login/LoginScreen";
 import SignupScreen from "./src/components/Authentication/Signup/SignupScreen";
 import ScheduleScreen from "./src/components/Schedule/ScheduleScreen";
 import HistoryScreen from "./src/components/History/HistoryScreen";
+import ListCoursesScreen from "./src/components/ListCourses/ListCoursesScreen";
 import { Provider } from "react-redux";
 import { Store } from "./src/redux/store";
 
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <Provider store={Store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ScheduleScreen">
+        <Stack.Navigator initialRouteName="ListCoursesScreen">
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
@@ -45,6 +46,11 @@ export default function App() {
           <Stack.Screen
             name="HistoryScreen"
             component={HistoryScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ListCoursesScreen"
+            component={ListCoursesScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
