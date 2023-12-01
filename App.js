@@ -5,6 +5,7 @@ import TutorDetail from "./src/components/Tutor/TutorDetail";
 import Tutor from "./src/components/Tutor/Tutor";
 import LoginScreen from "./src/components/Authentication/Login/LoginScreen";
 import SignupScreen from "./src/components/Authentication/Signup/SignupScreen";
+import ForgotPasswordScreen from "./src/components/Authentication/Login/ForgotPasswordScreen";
 import ScheduleScreen from "./src/components/Schedule/ScheduleScreen";
 import HistoryScreen from "./src/components/History/HistoryScreen";
 import ListCoursesScreen from "./src/components/ListCourses/ListCoursesScreen";
@@ -57,6 +58,11 @@ export default function App() {
           <Stack.Screen
             name="CourseDetailScreen"
             component={CourseDetailScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ForgotPasswordScreen"
+            component={ForgotPasswordScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

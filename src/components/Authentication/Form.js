@@ -4,7 +4,7 @@ import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
 import CustomButton from "./CustomButton";
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail, setPassword, setUser } from "../../redux/reducers";
+import { setUser } from "../../redux/reducers";
 
 const facebookImg = require("../../../assets/logo/facebook-logo.3bac8064.png");
 const googleImg = require("../../../assets/logo/google-logo.5f53496e.png");
@@ -14,6 +14,10 @@ export default function Form(props) {
   const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authentication.users);
+
+  const forgotPassword = () => {
+    props.navigation.navigate("ForgotPasswordScreen");
+  }
 
   const onSubmit = (data) => {
     if (props.form == "LOG IN") {
@@ -79,7 +83,7 @@ export default function Form(props) {
       {props.form == "LOG IN" && (
         <Text
           style={{ color: "#008fff", marginBottom: 5 }}
-          onPress={() => Linking.openURL("http://google.com")}
+          onPress={forgotPassword}
         >
           Forgot Password?
         </Text>

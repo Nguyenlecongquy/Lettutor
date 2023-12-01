@@ -4,17 +4,15 @@ import {
   View,
   Image,
   ScrollView,
-  Pressable,
   Text,
   Dimensions,
   SafeAreaView,
   StatusBar,
 } from "react-native";
 import Form from "../Form";
+import HeaderV2 from "../../Common/HeaderV2";
 
 const LoginImage = require("../../../../assets/login/login.png");
-const Logo = require("../../../../assets/logo/lettutor_logo.png");
-const Language = require("../../../../assets/logo/united-states.eb0c11f1.png");
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -23,18 +21,7 @@ const SignupScreen = (props) => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
 
-      <View style={styles.head}>
-        <View style={styles.logoButtonContainer}>
-          <Pressable style={styles.logoButton}>
-            <Image source={Logo} style={styles.LogoImage} />
-          </Pressable>
-        </View>
-        <View style={styles.languageButtonContainer}>
-          <Pressable style={styles.languageButton}>
-            <Image source={Language} style={styles.LanguageImage} />
-          </Pressable>
-        </View>
-      </View>
+      <HeaderV2/>
 
       <ScrollView style={styles.body}>
         <View style={styles.LoginImageContainer}>
@@ -56,54 +43,6 @@ const SignupScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  head: {
-    width: "100%",
-    height: 50,
-    position: "absolute",
-    left: 0,
-    top: 0,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: '#fff',
-  },
-  logoButtonContainer: {
-    width: "40%",
-    height: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 10,
-  },
-  languageButtonContainer: {
-    width: "15%",
-    height: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  logoButton: {
-    width: "90%",
-    height: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  languageButton: {
-    width: "90%",
-    height: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  LogoImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain",
-  },
-  LanguageImage: {
-    width: 35,
-    height: 35,
-    borderRadius: 20,
-    borderWidth: 6,
-    borderColor: "#e4e6eb",
   },
   body: {
     width: "100%",

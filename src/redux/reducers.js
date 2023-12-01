@@ -13,12 +13,6 @@ export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    setEmail: (state, action) => {
-      state.email = action.payload
-    },
-    setPassword: (state, action) => {
-      state.password = action.payload
-    },
     setUser: (state, action) => {
       let newUser = {
         email: action.payload.email,
@@ -30,6 +24,6 @@ export const authenticationSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { setEmail, setPassword, setUser } = authenticationSlice.actions
+export const { setUser } = authenticationSlice.actions
 
 export default authenticationSlice.reducer
