@@ -1,8 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import RenderItems from "./RenderItems";
+import { useDispatch } from "react-redux";
+import { setSpecialitiesFilter, setNameFilter, setNationalityFilter } from "../../../../redux/reducers/filter";
 
-function TagFilter() {
+const TagFilter = () => {
+  const dispatch = useDispatch();
+
   const listTag = [
     { key: "0", value: "All" },
     { key: "1", value: "English for kids" },
@@ -18,6 +22,12 @@ function TagFilter() {
     { key: "11", value: "TOEIC" },
   ];
 
+  const resetFilter = () => {
+    dispatch(setSpecialitiesFilter('All'))
+    dispatch(setNameFilter(''))
+    // dispatch(setNationalityFilter([]))
+  }
+
   return (
     <View style={styles.tag}>
       <View style={styles.tag}>
@@ -25,7 +35,7 @@ function TagFilter() {
           <RenderItems title={item.value} />
         ))}
       </View>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity style={styles.btn} onPress={resetFilter}>
         <Text style={styles.text}>Reset Filters</Text>
       </TouchableOpacity>
     </View>

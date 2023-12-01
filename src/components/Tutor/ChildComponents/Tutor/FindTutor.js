@@ -1,13 +1,24 @@
-import React, {useState} from "react";
-import { View, StyleSheet, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
-import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import { FontAwesome } from '@expo/vector-icons';
+import DateTimePicker, {
+  DateTimePickerAndroid,
+} from "@react-native-community/datetimepicker";
+import { FontAwesome } from "@expo/vector-icons";
 import TagFilter from "./TagFilter";
+import { useDispatch, useSelector } from "react-redux";
+import { setNameFilter, setNationalityFilter } from "../../../../redux/reducers/filter";
 
 const FindTutor = () => {
-  const [tutorName, setTutorName] = useState('')
-  const [tutorNationality, setTutorNationality] = useState([]);
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.filter.data.name);
+  const [tutorNationality, setTutorNationality] = useState([])
 
   const data = [
     { key: "1", value: "Foreign Tutor" },
@@ -58,6 +69,11 @@ const FindTutor = () => {
     setShowEndTimeWatch(true);
   };
 
+  const nationalityFilter = (val) => {
+    setTutorNationality(val)
+    dispatch(setNationalityFilter(tutorNationality))
+  }
+
   return (
     <View style={styles.findTutor}>
       <Text style={{ fontSize: 26, fontWeight: "bold", letterSpacing: 1 }}>
@@ -67,11 +83,11 @@ const FindTutor = () => {
         placeholder="Enter tutor name"
         placeholderTextColor="#e7afaf"
         style={styles.inputText}
-        onChangeText={(val) => setTutorName(val)}
-        value={tutorName}
+        onChangeText={(val) => dispatch(setNameFilter(val))}
+        value={name}
       />
       <MultipleSelectList
-        setSelected={(val) => setTutorNationality(val)}
+        setSelected={nationalityFilter}
         data={data}
         save="value"
         label="Tutor nationality"
@@ -82,63 +98,55 @@ const FindTutor = () => {
         Select available tutoring time:
       </Text>
       <TouchableOpacity onPress={showDatepicker} style={styles.inputText}>
-        {!showDate && (
-          <Text style={{color: '#e7afaf'}}>Select a day</Text>
-        )}
-        {showDate && (
-          <Text>{date.toDateString()}</Text>
-        )}
+        {!showDate && <Text style={{ color: "#e7afaf" }}>Select a day</Text>}
+        {showDate && <Text>{date.toDateString()}</Text>}
       </TouchableOpacity>
       {showDateWatch && (
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
-          mode='date'
+          mode="date"
           is24Hour={true}
           onChange={onChangeDate}
         />
       )}
 
       <View style={[styles.inputText, styles.timeContainer]}>
-        <TouchableOpacity onPress={showStartTimepicker} style={[styles.timeBtn]}>
+        <TouchableOpacity
+          onPress={showStartTimepicker}
+          style={[styles.timeBtn]}
+        >
           {!showStartTime && (
-            <Text style={{color: '#e7afaf'}}>Start time</Text>
+            <Text style={{ color: "#e7afaf" }}>Start time</Text>
           )}
-          {showStartTime && (
-            <Text>{startTime.toTimeString()}</Text>
-          )}
+          {showStartTime && <Text>{startTime.toTimeString()}</Text>}
         </TouchableOpacity>
         {showStartTimeWatch && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={startTime}
-          mode='time'
-          is24Hour={true}
-          onChange={onChangeStartTime}
-        />
-      )}
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={startTime}
+            mode="time"
+            is24Hour={true}
+            onChange={onChangeStartTime}
+          />
+        )}
         <FontAwesome name="long-arrow-right" size={24} color="black" />
         <TouchableOpacity onPress={showEndTimepicker} style={[styles.timeBtn]}>
-          {!showEndTime && (
-            <Text style={{color: '#e7afaf'}}>End time</Text>
-          )}
-          {showEndTime && (
-            <Text>{endTime.toTimeString()}</Text>
-          )}
+          {!showEndTime && <Text style={{ color: "#e7afaf" }}>End time</Text>}
+          {showEndTime && <Text>{endTime.toTimeString()}</Text>}
         </TouchableOpacity>
         {showEndTimeWatch && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={endTime}
-          mode='time'
-          is24Hour={true}
-          onChange={onChangeEndTime}
-        />
-      )}
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={endTime}
+            mode="time"
+            is24Hour={true}
+            onChange={onChangeEndTime}
+          />
+        )}
       </View>
-      
-      <TagFilter/>
 
+      <TagFilter />
     </View>
   );
 };
@@ -159,7 +167,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     marginVertical: 5,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   multipleSelectList: {
     backgroundColor: "#fff",
@@ -169,15 +177,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   timeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 0,
   },
   timeBtn: {
     width: 150,
     borderWidth: 0,
-    alignItems: 'center',
+    alignItems: "center",
   },
 });
 

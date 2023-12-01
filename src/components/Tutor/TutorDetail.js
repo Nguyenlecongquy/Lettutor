@@ -12,7 +12,6 @@ import Gift from "../Common/Gift";
 import Message from "../Common/Message";
 import Header from "../Common/Header";
 import TutorInfor from "./ChildComponents/TutorDetail/TutorInfor";
-import RenderTag from "./ChildComponents/Tutor/RenderTag";
 import TutorFieldText from "./ChildComponents/TutorDetail/TutorFieldText";
 import TutorFieldTag from "./ChildComponents/TutorDetail/TutorFieldTag";
 import OtherReview from "./ChildComponents/TutorDetail/OtherReview";
@@ -21,7 +20,10 @@ import { Video } from "expo-av";
 
 const windowHeight = Dimensions.get("window").height;
 
-const TutorDetail = () => {
+const TutorDetail = ({ route, navigation }) => {
+
+  const data = route.params.data;
+
   const video = React.useRef(null);
 
   const fieldTutor = [
@@ -102,7 +104,9 @@ const TutorDetail = () => {
 
       <Header />
       <ScrollView style={styles.body}>
-        <TutorInfor />
+
+        <TutorInfor data = {data}/>
+
         <View style={styles.videoContainer}>
           <Video
             ref={video}

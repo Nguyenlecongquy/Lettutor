@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { setSpecialitiesFilter } from "../../../../redux/reducers/filter";
 
 const RenderItems = (props) => {
-  const [defaultStyle, setDefaultStyle] = useState(true);
+  const dispatch = useDispatch();
+
+  const specialities = useSelector((state) => state.filter.data.specialities);
+
+  const specialitiesChoose = () => {
+    dispatch(setSpecialitiesFilter(props.title));
+  };
 
   return (
     <View style={styles.items}>
-      <Pressable onPress={() => setDefaultStyle(!defaultStyle)}>
+      <Pressable onPress={specialitiesChoose}>
         <Text
           style={
-            defaultStyle ? styles.textBefore : styles.textAfter
+            props.title != specialities ? styles.textBefore : styles.textAfter
           }
         >
           {props.title}

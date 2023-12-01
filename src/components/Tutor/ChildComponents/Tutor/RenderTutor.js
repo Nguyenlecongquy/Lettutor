@@ -4,53 +4,91 @@ import { Entypo } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import RenderTag from "./RenderTag";
+import { useSelector, useDispatch } from "react-redux";
 
 const RenderTutor = (props) => {
+  const specialities = useSelector((state) => state.filter.data.specialities);
+  const name = useSelector((state) => state.filter.data.name);
+  const nationality = useSelector((state) => state.filter.data.nationality);
+
   const moveToTutorDetail = () => {
-    props.navigation.navigate("TutorDetail");
+    props.navigation.navigate("TutorDetail", {data: props});
   };
 
-  return (
-    <View style={styles.container}>
-      <View style={{ width: "100%", alignItems: "center" }}>
+  var yellowStar = [];
+  var greyStar = [];
+  for (let i = 0; i < props.star; i++) {
+    yellowStar.push(<Entypo name="star" size={18} color="#fadb14" />);
+  }
+  for (let i = 0; i < 5 - props.star; i++) {
+    greyStar.push(<Entypo name="star" size={18} color="#f0f0f0" />);
+  }
+
+  var setOfSpecialities = new Set(props.listTag);
+  var displaySpecialities = setOfSpecialities.has(specialities);
+  if (specialities == "All") displaySpecialities = true;
+
+  var displayName = name == props.name;
+  if (name == "") displayName = true;
+
+  var setOfNationality = new Set(nationality);
+  var displayNationality = false;
+  if (
+    (setOfNationality.has("Native English Tutor") &&
+      props.nationality == "England") ||
+    (setOfNationality.has("Vietnamese Tutor") &&
+      props.nationality == "Vietnamese") ||
+    (setOfNationality.has("Foreign Tutor") &&
+      props.nationality != "Vietnamese")
+  )
+    displayNationality = true;
+  if (setOfNationality.size == 0)
+    displayNationality = true
+
+  if (displaySpecialities && displayName && displayNationality) {
+    return (
+      <View style={styles.container}>
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <Pressable onPress={moveToTutorDetail}>
+            <Image source={{ uri: props.avatar }} style={styles.avatar} />
+          </Pressable>
+        </View>
+
+        <Feather name="heart" size={24} color="blue" style={styles.heart} />
         <Pressable onPress={moveToTutorDetail}>
-          <Image
-            source={require("../../../../../assets/listTutor/000001.jpg")}
-            style={styles.avatar}
-          />
+          <Text style={styles.name}>{props.name}</Text>
         </Pressable>
-      </View>
 
-      <Feather name="heart" size={24} color="blue" style={styles.heart} />
-      <Pressable onPress={moveToTutorDetail}>
-        <Text style={styles.name}>{props.name}</Text>
-      </Pressable>
+        <View style={{ flexDirection: "row" }}>
+          <Image source={{ uri: props.nationalityFlag }} style={styles.flag} />
+          <Text style={{ marginLeft: 3 }}>{props.nationality}</Text>
+        </View>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            {yellowStar}
+          </View>
+          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            {greyStar}
+          </View>
+        </View>
 
-      <View style={{ flexDirection: "row" }}>
-        <Image source={{ uri: props.nationalityFlag }} style={styles.flag} />
-        <Text>{props.nationality}</Text>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          {props.listTag.map((tags) => (
+            <RenderTag title={tags} />
+          ))}
+        </View>
+        <Text style={{ height: 70 }}>{props.introduce}</Text>
+        <View style={{ width: "100%", alignItems: "flex-end" }}>
+          <Pressable style={styles.book}>
+            <MaterialIcons name="call-to-action" size={24} color="blue" />
+            <Text style={styles.bookText}>Book</Text>
+          </Pressable>
+        </View>
       </View>
-      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-        <Entypo name="star" size={18} color="yellow" />
-        <Entypo name="star" size={18} color="yellow" />
-        <Entypo name="star" size={18} color="yellow" />
-        <Entypo name="star" size={18} color="yellow" />
-        <Entypo name="star" size={18} color="yellow" />
-      </View>
-      <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-        {props.listTag.map((tags) => (
-          <RenderTag title={tags} />
-        ))}
-      </View>
-      <Text>{props.introduce}</Text>
-      <View style={{ width: "100%", alignItems: "flex-end" }}>
-        <Pressable style={styles.book}>
-          <MaterialIcons name="call-to-action" size={24} color="blue" />
-          <Text style={styles.bookText}>Book</Text>
-        </Pressable>
-      </View>
-    </View>
-  );
+    );
+  } else {
+    return <View></View>;
+  }
 };
 
 const styles = StyleSheet.create({

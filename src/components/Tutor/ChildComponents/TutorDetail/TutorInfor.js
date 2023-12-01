@@ -4,18 +4,20 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 
-const TutorInfor = () => {
+const TutorInfor = (props) => {
+  data = props.data
+  console.log('abc', data)
   return (
     <View style={styles.infor}>
       <View style={{ flexDirection: "row" }}>
         <View>
           <Image
-            source={require("../../../../../assets/listTutor/000001.jpg")}
+            source={{ uri: data.avatar }}
             style={styles.avatar}
           />
         </View>
         <View style={{ justifyContent: "center" }}>
-          <Text style={styles.name}>Apri Baldo</Text>
+          <Text style={styles.name}>{data.name}</Text>
           <View style={{ flexDirection: "row" }}>
             <Entypo name="star" size={18} color="yellow" />
             <Entypo name="star" size={18} color="yellow" />
@@ -26,19 +28,17 @@ const TutorInfor = () => {
           <View style={{ flexDirection: "row" }}>
             <Image
               source={{
-                uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/338px-Flag_of_Vietnam.svg.png",
+                uri: data.nationalityFlag,
               }}
               style={styles.flag}
             />
-            <Text>Vietnamese</Text>
+            <Text>{data.nationality}</Text>
           </View>
         </View>
       </View>
       <View>
         <Text style={styles.intro}>
-          Hello! My name is April Baldo, you can just call me Teacher April. I
-          am an English teacher and currently teaching in senior high school. I
-          have been teaching grammar and literature for almost 10 years.
+          {data.introduce}
         </Text>
         <View style={{ flexDirection: "row" }}>
           <Pressable style={styles.btnHeart}>

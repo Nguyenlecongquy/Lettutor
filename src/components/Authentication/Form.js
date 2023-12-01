@@ -4,7 +4,7 @@ import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
 import CustomButton from "./CustomButton";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../redux/reducers";
+import { setUser } from "../../redux/reducers/authentication";
 
 const facebookImg = require("../../../assets/logo/facebook-logo.3bac8064.png");
 const googleImg = require("../../../assets/logo/google-logo.5f53496e.png");
