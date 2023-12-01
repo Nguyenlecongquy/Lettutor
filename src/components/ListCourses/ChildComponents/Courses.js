@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, Pressable, SectionList } from "react-native";
 import RenderItems from "./RenderItems";
 
-const Courses = () => {
+const Courses = (props) => {
   const [selected, setSelected] = useState("Course");
 
   const DATA = [
@@ -11,21 +11,24 @@ const Courses = () => {
       data: [
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
@@ -37,21 +40,24 @@ const Courses = () => {
       data: [
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
@@ -63,21 +69,24 @@ const Courses = () => {
       data: [
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
         },
         {
           name: "Life in the Internet Age",
-          image: 'https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e',
+          image:
+            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
           describe: "Let's discuss how technology is changing the way we live",
           level: "Intermediate",
           numberOfLesson: 9,
@@ -128,7 +137,7 @@ const Courses = () => {
         sections={DATA}
         keyExtractor={(item, index) => item + index}
         renderItem={({ item }) => (
-            <RenderItems data={item}/>
+          <RenderItems data={item} navigation={props.navigation} />
         )}
         renderSectionHeader={({ section: { title } }) => (
           <Text style={styles.header}>{title}</Text>
@@ -163,7 +172,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: '500',
+    fontWeight: "500",
     backgroundColor: "#fff",
     marginTop: 40,
     marginBottom: 10,

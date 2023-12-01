@@ -4,8 +4,13 @@ import { Entypo } from "@expo/vector-icons";
 
 const RenderItems = (props) => {
   data = props.data;
+
+  const navigate = () => {
+    props.navigation.navigate("CourseDetailScreen");
+  };
+
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={navigate}>
       <Image source={{ uri: data.image }} style={styles.image} />
       <View style={{ paddingLeft: 15 }}>
         <Text style={styles.name}>{data.name}</Text>
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#dadada',
+    borderColor: "#dadada",
   },
   image: {
     width: 248,

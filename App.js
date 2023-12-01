@@ -8,16 +8,17 @@ import SignupScreen from "./src/components/Authentication/Signup/SignupScreen";
 import ScheduleScreen from "./src/components/Schedule/ScheduleScreen";
 import HistoryScreen from "./src/components/History/HistoryScreen";
 import ListCoursesScreen from "./src/components/ListCourses/ListCoursesScreen";
+import CourseDetailScreen from "./src/components/ListCourses/CourseDetailScreen";
 import { Provider } from "react-redux";
-import { Store } from "./src/redux/store";
+import { store } from "./src/redux/store";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <Provider store={Store}>
+    <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ListCoursesScreen">
+        <Stack.Navigator initialRouteName="SignupScreen">
           <Stack.Screen
             name="LoginScreen"
             component={LoginScreen}
@@ -51,6 +52,11 @@ export default function App() {
           <Stack.Screen
             name="ListCoursesScreen"
             component={ListCoursesScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CourseDetailScreen"
+            component={CourseDetailScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

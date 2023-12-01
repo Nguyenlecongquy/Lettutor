@@ -1,19 +1,35 @@
-import { SET_EMAIL, SET_PASSWORD } from "./actions";
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  email: "",
-  password: "",
-};
+  users: [
+    { 
+      email: 'abc',
+      password: '123',
+    },
+  ]
+}
 
-const userReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_EMAIL:
-      return { ...state, email: action.payload };
-    case SET_PASSWORD:
-      return { ...state, password: action.payload };
-    default:
-      return state;
-  }
-};
+export const authenticationSlice = createSlice({
+  name: 'authentication',
+  initialState,
+  reducers: {
+    setEmail: (state, action) => {
+      state.email = action.payload
+    },
+    setPassword: (state, action) => {
+      state.password = action.payload
+    },
+    setUser: (state, action) => {
+      let newUser = {
+        email: action.payload.email,
+        password: action.payload.password,
+      }
+      state.users.push(newUser)
+    }
+  },
+})
 
-export default userReducer;
+// Action creators are generated for each case reducer function
+export const { setEmail, setPassword, setUser } = authenticationSlice.actions
+
+export default authenticationSlice.reducer

@@ -11,6 +11,7 @@ import {
   StatusBar,
 } from "react-native";
 import Form from "../Form";
+import { useSelector, useDispatch } from 'react-redux'
 
 const LoginImage = require("../../../../assets/login/login.png");
 const Logo = require("../../../../assets/logo/lettutor_logo.png");
@@ -19,6 +20,10 @@ const Language = require("../../../../assets/logo/united-states.eb0c11f1.png");
 const windowHeight = Dimensions.get("window").height;
 
 const LoginScreen = (props) => {
+
+  const user = useSelector((state) => state.authentication);
+  // console.log("user", user)
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />

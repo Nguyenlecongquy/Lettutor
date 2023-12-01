@@ -1,59 +1,40 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-} from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { StyleSheet, Text, View, TextInput } from "react-native";
+import { Controller } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { setEmail, setPassword } from "../../redux/actions";
-const CustomInput = ({
-  control,
-  name,
-  label,
-  rules = {},
-  placeholder,
-  secureTextEntry,
-}) => {
 
-  const {
-    formState: { errors },
-  } = useForm();
-  const {register} = useForm()
-
-  const { email, password } = useSelector((state) => state.userReducer);
-  const changeUserValue = (value) => {
-    if (name == 'email')
-      useDispatch(setEmail(value))
-    else
-      useDispatch(setPassword(value))
-  }
-
+const CustomInput = (props) => {
   return (
     <Controller
-      name={name}
-      control={control}
-      rules={rules}
+      name={props.name}
+      control={props.control}
+      rules={props.rules}
       render={({
         field: { onChange, onBlur, value },
         fieldState: { error },
       }) => (
         <>
-          <Text style={{color: '#e7afaf', marginTop: 5}}>{label}</Text>
-          <View style={[styles.container, {borderColor: error ? 'red' : "#e8e8e8"}]}>
+          <Text style={{ color: "#e7afaf", marginTop: 5 }}>{props.label}</Text>
+          <View
+            style={[
+              styles.container,
+              { borderColor: error ? "red" : "#e8e8e8" },
+            ]}
+          >
             <TextInput
-              placeholder={placeholder}
+              placeholder={props.placeholder}
               placeholderTextColor="#e7afaf"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
-              secureTextEntry={secureTextEntry}
+              secureTextEntry={props.secureTextEntry}
               style={styles.input}
             />
           </View>
           {error && (
-            <Text style={{color: 'red', alignSelf: 'stretch'}}>{error.message || 'Required'}</Text>
+            <Text style={{ color: "red", alignSelf: "stretch" }}>
+              {error.message || "Required"}
+            </Text>
           )}
         </>
       )}
@@ -73,7 +54,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   input: {
-    color: '#000',
+    color: "#000",
   },
 });
 

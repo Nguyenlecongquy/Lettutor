@@ -9,22 +9,20 @@ import {
 import Gift from "../Common/Gift";
 import Message from "../Common/Message";
 import Header from "../Common/Header";
-import PageSegmentation from "../Common/PageSegmentation";
-import IntroAndSearch from "./ChildComponents/IntroAndSearch";
-import Courses from "./ChildComponents/Courses";
+import Detail from "./ChildComponents/Detail";
+import Discover from "./ChildComponents/Discover";
 
 const windowHeight = Dimensions.get("window").height;
 
-const ListCoursesScreen = (props) => {
+const CourseDetailScreen = (props) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
 
       <Header />
       <ScrollView style={styles.body}>
-        <IntroAndSearch/>
-        <Courses navigation={props.navigation}/>
-        <PageSegmentation />
+        <Discover/>
+        <Detail/>
       </ScrollView>
 
       <Gift />
@@ -44,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListCoursesScreen;
+export default CourseDetailScreen;
