@@ -3,13 +3,13 @@ import { View, StyleSheet } from "react-native";
 import LogoView from "./LogoView";
 import CircleButton from "./CircleButton";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <View style={styles.head}>
       <LogoView />
       <View style={styles.buttonContainer}>
         <CircleButton type="language" />
-        <CircleButton type="menubar" />
+        <CircleButton type="menubar" navigation={props.navigation}/>
       </View>
     </View>
   );

@@ -6,7 +6,7 @@ import { Octicons } from "@expo/vector-icons";
 
 const TutorInfor = (props) => {
   data = props.data
-  console.log('abc', data)
+  
   return (
     <View style={styles.infor}>
       <View style={{ flexDirection: "row" }}>

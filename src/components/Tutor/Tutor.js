@@ -112,7 +112,7 @@ const Tutor = (props) => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
 
-      <Header />
+      <Header navigation={props.navigation}/>
       <ScrollView style={styles.body}>
         <UpcomingLesson />
         <FindTutor />

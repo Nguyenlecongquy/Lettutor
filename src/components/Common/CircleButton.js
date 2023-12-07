@@ -1,25 +1,29 @@
-import React from 'react'
-import { Image, View, StyleSheet, TouchableHighlight } from 'react-native'
+import React from "react";
+import { Image, View, StyleSheet, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 const Language = require("../../../assets/logo/united-states.eb0c11f1.png");
 
 const CircleButton = (props) => {
-  if (props.type == 'language')
+  const showDrawer = () => {
+    props.navigation.navigate("NavMenuScreen");
+  };
+
+  if (props.type == "language")
     return (
-      <TouchableHighlight style={styles.container}>
-        <Image source={Language} style={styles.image}/>
-      </TouchableHighlight>
-    )
-  else if (props.type == 'menubar')
+      <Pressable style={styles.container}>
+        <Image source={Language} style={styles.image} />
+      </Pressable>
+    );
+  else if (props.type == "menubar")
     return (
-      <TouchableHighlight style={styles.container}>
+      <Pressable style={styles.container} onPress={showDrawer}>
         <View style={styles.barMenu}>
-          <AntDesign name="bars" size={23} color="black"/>
+          <AntDesign name="bars" size={23} color="black" />
         </View>
-      </TouchableHighlight>
-    )
-}
+      </Pressable>
+    );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -30,16 +34,16 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 20,
     borderWidth: 6,
-    borderColor: '#e4e6eb',
+    borderColor: "#e4e6eb",
   },
   barMenu: {
     width: 35,
     height: 35,
     borderRadius: 20,
     borderWidth: 6,
-    backgroundColor: '#e4e6eb',
-    borderColor: '#e4e6eb',
-  }
-})
+    backgroundColor: "#e4e6eb",
+    borderColor: "#e4e6eb",
+  },
+});
 
-export default CircleButton
+export default CircleButton;

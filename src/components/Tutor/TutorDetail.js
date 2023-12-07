@@ -20,9 +20,9 @@ import { Video } from "expo-av";
 
 const windowHeight = Dimensions.get("window").height;
 
-const TutorDetail = ({ route, navigation }) => {
+const TutorDetail = (props) => {
 
-  const data = route.params.data;
+  const data = props.route.params.data;
 
   const video = React.useRef(null);
 
@@ -102,9 +102,9 @@ const TutorDetail = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
 
-      <Header />
-      <ScrollView style={styles.body}>
+      <Header navigation={props.navigation}/>
 
+      <ScrollView style={styles.body}>
         <TutorInfor data = {data}/>
 
         <View style={styles.videoContainer}>
@@ -116,7 +116,6 @@ const TutorDetail = ({ route, navigation }) => {
             }}
             useNativeControls
             resizeMode="contain"
-            isLooping
             controls
           />
         </View>

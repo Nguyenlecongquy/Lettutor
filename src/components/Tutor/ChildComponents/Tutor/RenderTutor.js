@@ -5,13 +5,17 @@ import { Feather } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import RenderTag from "./RenderTag";
 import { useSelector, useDispatch } from "react-redux";
+import { setScreen } from "../../../../redux/reducers/screen";
 
 const RenderTutor = (props) => {
   const specialities = useSelector((state) => state.filter.data.specialities);
   const name = useSelector((state) => state.filter.data.name);
   const nationality = useSelector((state) => state.filter.data.nationality);
 
+  const dispatch = useDispatch()
+
   const moveToTutorDetail = () => {
+    dispatch(setScreen("TutorDetail"))
     props.navigation.navigate("TutorDetail", {data: props});
   };
 
