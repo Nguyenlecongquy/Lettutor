@@ -4,7 +4,7 @@ import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
 import CustomButton from "./CustomButton";
 import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../redux/reducers/authentication";
+import { setUser, setCurrent } from "../../redux/reducers/authentication";
 
 const facebookImg = require("../../../assets/logo/facebook-logo.3bac8064.png");
 const googleImg = require("../../../assets/logo/google-logo.5f53496e.png");
@@ -25,6 +25,7 @@ export default function Form(props) {
         if (data.email == user[i].email) {
           if (data.password == user[i].password) {
             Alert.alert("Log in Success!");
+            dispatch(setCurrent(data.email))
             props.navigation.navigate("Tutor");
             return;
           } else {

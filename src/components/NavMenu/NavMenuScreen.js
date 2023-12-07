@@ -14,11 +14,29 @@ import Header from "../Common/Header";
 import Gift from "../Common/Gift";
 import Message from "../Common/Message";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ImageViewer from "../Profile/ChildComponents/ImageViewer";
 
 const windowHeight = Dimensions.get("window").height;
 
 const NavMenuScreen = (props) => {
+  const dispatch = useDispatch();
+
+  const email = useSelector((state) => state.authentication.current);
+  let name = "";
+  let avatar = "";
+
+  const findInfor = () => {
+    let users = useSelector((state) => state.authentication.users);
+    for (let i = 0; i < users.length; i++) {
+      if (email == users[i].email) {
+        name = users[i].name;
+        avatar = users[i].avatar;
+      }
+    }
+  };
+  findInfor();
+
   const moveToProfile = () => {
     props.navigation.navigate("ProfileScreen");
   };
@@ -58,8 +76,14 @@ const NavMenuScreen = (props) => {
         <View style={{ width: "90%", marginHorizontal: "5%" }}>
           <Pressable onPress={moveToProfile}>
             <View style={styles.items}>
-              <View style={styles.icon}></View>
-              <Text style={styles.text}>Hai Pham</Text>
+              <View style={styles.icon}>
+                <ImageViewer
+                  placeholderImageSource={PlaceholderImage}
+                  selectedImage={avatar}
+                  style={styles.avatar}
+                />
+              </View>
+              <Text style={styles.text}>{name}</Text>
             </View>
           </Pressable>
 
@@ -68,7 +92,6 @@ const NavMenuScreen = (props) => {
               <View style={styles.icon}>
                 <FontAwesome5 name="calendar-alt" size={40} color="#5b6cf3" />
               </View>
-
               <Text style={styles.text}>Recurring Lesson Schedule</Text>
             </View>
           </Pressable>
@@ -169,6 +192,11 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 50,
+  },
+  avatar: {
+    width: 38,
+    height: 38,
+    borderRadius: 20,
   },
 });
 
