@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, Linking, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Linking,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { useForm } from "react-hook-form";
 import CustomInput from "./CustomInput";
 import CustomSubmit from "./CustomSubmit";
@@ -14,41 +22,82 @@ export default function Form(props) {
   const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authentication.users);
+  const [dataUser, setDataUser] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const urlLogin = "https://sandbox.api.lettutor.com/auth/login";
+  const urlSignup = "https://sandbox.api.lettutor.com/auth/register";
 
   const forgotPassword = () => {
     props.navigation.navigate("ForgotPasswordScreen");
-  }
+  };
+
+  const login = async (dataInput) => {
+    setIsLoading(true);
+    try {
+      let result = await fetch(urlLogin, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataInput),
+      });
+      result = await result.json();
+      if (result.user == undefined) {
+        Alert.alert(result.message);
+      } else {
+        setDataUser(result);
+        dispatch(setUser(dataUser));
+        props.navigation.navigate("Tutor");
+      }
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const signup = async (dataInput) => {
+    setIsLoading(true);
+    try {
+      let result = await fetch(urlSignup, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataInput),
+      });
+      result = await result.json();
+      console.log(result);
+      if (result.user == undefined) {
+        Alert.alert(result.message);
+      } else {
+        Alert.alert("Successful");
+        props.navigation.navigate("LoginScreen");
+      }
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onSubmit = (data) => {
     if (props.form == "LOG IN") {
-      for (let i = 0; i < user.length; i++) {
-        if (data.email == user[i].email) {
-          if (data.password == user[i].password) {
-            Alert.alert("Log in Success!");
-            dispatch(setCurrent(data.email))
-            props.navigation.navigate("Tutor");
-            return;
-          } else {
-            Alert.alert("Wrong password!");
-            return;
-          }
-        }
-      }
-      Alert.alert("Wrong email!");
+      let dataInput = {
+        email: data.email,
+        password: data.password,
+      };
+      login(dataInput);
     } else {
-      let exist = false;
-      for (let i = 0; i < user.length; i++) {
-        if (data.email == user[i].email) {
-          exist = true;
-          break;
-        }
-      }
-      if (exist == true) Alert.alert("Email already exists!");
-      else {
-        Alert.alert("Sign up Success!");
-        dispatch(setUser(data));
-        props.navigation.navigate("LoginScreen");
-      }
+      let dataInput = {
+        email: data.email,
+        password: data.password,
+        source: null,
+      };
+      signup(dataInput);
     }
   };
 
@@ -91,6 +140,8 @@ export default function Form(props) {
       )}
 
       <CustomSubmit label={props.form} onSubmit={handleSubmit(onSubmit)} />
+
+      {isLoading && <ActivityIndicator size="large" color="#008fff" />}
 
       <Text style={{ textAlign: "center", marginVertical: 15 }}>
         Or continue with
