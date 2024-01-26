@@ -21,21 +21,8 @@ const windowHeight = Dimensions.get("window").height;
 
 const NavMenuScreen = (props) => {
   const dispatch = useDispatch();
-
-  const email = useSelector((state) => state.authentication.current);
-  let name = "";
-  let avatar = "";
-
-  const findInfor = () => {
-    let users = useSelector((state) => state.authentication.users);
-    for (let i = 0; i < users.length; i++) {
-      if (email == users[i].email) {
-        name = users[i].name;
-        avatar = users[i].avatar;
-      }
-    }
-  };
-  findInfor();
+  const user = useSelector((state) => state.authentication.user.user)
+  console.log("user", user)
 
   const moveToProfile = () => {
     props.navigation.navigate("ProfileScreen");
@@ -77,13 +64,9 @@ const NavMenuScreen = (props) => {
           <Pressable onPress={moveToProfile}>
             <View style={styles.items}>
               <View style={styles.icon}>
-                <ImageViewer
-                  placeholderImageSource={PlaceholderImage}
-                  selectedImage={avatar}
-                  style={styles.avatar}
-                />
+                <Image source={{uri: user.avatar}} style={styles.avatar}/>
               </View>
-              <Text style={styles.text}>{name}</Text>
+              <Text style={styles.text}>{user.name}</Text>
             </View>
           </Pressable>
 

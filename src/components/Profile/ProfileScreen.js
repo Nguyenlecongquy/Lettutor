@@ -27,29 +27,18 @@ import {
 const windowHeight = Dimensions.get("window").height;
 
 const ProfileScreen = (props) => {
-  const dispatch = useDispatch();
-
-  PlaceholderImage = require("../../../assets/profile/default.png");
-
   const { control, handleSubmit } = useForm();
-  const email = useSelector((state) => state.authentication.current);
+  const user = useSelector((state) => state.authentication.user.user);
+  const dispatch = useDispatch();
+  let email = "";
   let name = "";
   let avatar = "";
   let country = "";
   let phone = "";
 
-  const findInfor = () => {
-    let users = useSelector((state) => state.authentication.users);
-    for (let i = 0; i < users.length; i++) {
-      if (email == users[i].email) {
-        name = users[i].name;
-        avatar = users[i].avatar;
-        country = users[i].country;
-        phone = users[i].phone;
-      }
-    }
-  };
-  findInfor();
+  // PlaceholderImage = require("../../../assets/profile/default.png");
+  let PlaceholderImage = {uri: user.avatar}
+  console.log(user.avatar)
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -58,11 +47,7 @@ const ProfileScreen = (props) => {
     });
 
     if (!result.canceled) {
-      let imageInfor = {
-        email: email,
-        avatar: result.assets[0].uri,
-      };
-      dispatch(setAvatar(imageInfor));
+      // nothing
     } else {
       alert("You did not select any image.");
     }
@@ -90,11 +75,7 @@ const ProfileScreen = (props) => {
   const [tag, setTag] = useState([]);
 
   const onSubmit = (data) => {
-    let nameInfor = {
-      email: email,
-      name: data.name,
-    };
-    dispatch(setName(nameInfor));
+    // nothing
   };
 
   return (
