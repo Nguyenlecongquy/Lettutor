@@ -21,12 +21,12 @@ const phoneImg = require("../../../assets/logo/mobile-logo.8ef12de5.png");
 export default function Form(props) {
   const { control, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authentication.users);
-  const [dataUser, setDataUser] = useState();
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
   const urlLogin = "https://sandbox.api.lettutor.com/auth/login";
   const urlSignup = "https://sandbox.api.lettutor.com/auth/register";
+  const urlListTutor = "https://sandbox.api.lettutor.com/tutor/more?perPage=9&page=1";
 
   const forgotPassword = () => {
     props.navigation.navigate("ForgotPasswordScreen");
@@ -42,13 +42,27 @@ export default function Form(props) {
         },
         body: JSON.stringify(dataInput),
       });
+
       result = await result.json();
-      if (result.user == undefined) {
+
+      if (result.statusCode == 400) {
         Alert.alert(result.message);
       } else {
-        setDataUser(result);
-        dispatch(setUser(dataUser));
-        props.navigation.navigate("Tutor");
+        dispatch(setUser(result));
+
+        const authToken = result.tokens.access.token;
+        const authorization = "Bearer " + authToken;
+
+        let listTutor = await fetch(urlListTutor, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authorization,
+          },
+        });
+        listTutor = await listTutor.json();
+        
+        props.navigation.navigate("Tutor", {listTutor: listTutor});
       }
     } catch (error) {
       setError(error);
@@ -68,9 +82,10 @@ export default function Form(props) {
         },
         body: JSON.stringify(dataInput),
       });
+
       result = await result.json();
-      console.log(result);
-      if (result.user == undefined) {
+      
+      if (result.statusCode == 400) {
         Alert.alert(result.message);
       } else {
         Alert.alert("Successful");

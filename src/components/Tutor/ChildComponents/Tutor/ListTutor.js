@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import RenderTutor from "./RenderTutor";
 
 const ListTutor = (props) => {
-  const listTutor = props.data
+  const listTutor = props.data.tutors.rows
 
   return (
     <View style={styles.listTutor}>
@@ -14,11 +14,12 @@ const ListTutor = (props) => {
         <RenderTutor
           avatar={items.avatar}
           name={items.name}
-          nationality={items.nationality}
-          nationalityFlag={items.nationalityFlag}
-          star={items.star}
-          listTag={items.listTag}
-          introduce={items.introduce}
+          nationality={items.country}
+          nationalityFlag=''
+          star={items.rating}
+          listTag={items.specialties}
+          introduce={items.bio}
+          video={items.video}
           navigation={props.navigation}
         />
       ))}

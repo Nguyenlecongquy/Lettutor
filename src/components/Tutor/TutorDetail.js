@@ -23,7 +23,6 @@ const windowHeight = Dimensions.get("window").height;
 const TutorDetail = (props) => {
 
   const data = props.route.params.data;
-
   const video = React.useRef(null);
 
   const fieldTutor = [
@@ -112,7 +111,7 @@ const TutorDetail = (props) => {
             ref={video}
             style={styles.video}
             source={{
-              uri: "http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+              uri: data.video,
             }}
             useNativeControls
             resizeMode="contain"

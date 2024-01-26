@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setScreen } from "../../../../redux/reducers/screen";
 
 const RenderTutor = (props) => {
+  let listTagArr = props.listTag.split(",");
+
   const specialities = useSelector((state) => state.filter.data.specialities);
   const name = useSelector((state) => state.filter.data.name);
   const nationality = useSelector((state) => state.filter.data.nationality);
@@ -19,12 +21,13 @@ const RenderTutor = (props) => {
     props.navigation.navigate("TutorDetail", {data: props});
   };
 
+  var star = Math.ceil(props.star)
   var yellowStar = [];
   var greyStar = [];
-  for (let i = 0; i < props.star; i++) {
+  for (let i = 0; i < star; i++) {
     yellowStar.push(<Entypo name="star" size={18} color="#fadb14" />);
   }
-  for (let i = 0; i < 5 - props.star; i++) {
+  for (let i = 0; i < 5 - star; i++) {
     greyStar.push(<Entypo name="star" size={18} color="#f0f0f0" />);
   }
 
@@ -77,7 +80,7 @@ const RenderTutor = (props) => {
         </View>
 
         <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-          {props.listTag.map((tags) => (
+          {listTagArr.map((tags) => (
             <RenderTag title={tags} />
           ))}
         </View>

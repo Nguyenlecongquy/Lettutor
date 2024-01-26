@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,6 +7,7 @@ import {
   StatusBar,
   Dimensions,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useForm } from "react-hook-form";
 import HeaderV2 from "../../Common/HeaderV2";
@@ -17,9 +18,29 @@ const windowHeight = Dimensions.get("window").height;
 
 const ForgotPasswordScreen = () => {
   const { control, handleSubmit } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
+  const urlResetPassword =
+    "https://sandbox.api.lettutor.com/user/forgotPassword";
 
-  const resetLink = () => {
-    Alert.alert('Please check your email!')
+  const resetLink = async (data) => {
+    setIsLoading(true);
+    console.log("data", data);
+    try {
+      let result = await fetch(urlResetPassword, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      result = await result.json();
+      Alert.alert(result.message);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -30,8 +51,12 @@ const ForgotPasswordScreen = () => {
 
       <View style={styles.body}>
         <View style={styles.formContainer}>
-          <Text style={{fontSize: 24, fontWeight: '500', textAlign: 'center'}}>Reset Password</Text>
-          <Text style={{textAlign: 'center'}}>
+          <Text
+            style={{ fontSize: 24, fontWeight: "500", textAlign: "center" }}
+          >
+            Reset Password
+          </Text>
+          <Text style={{ textAlign: "center" }}>
             Please enter your email address to search for your account.
           </Text>
           <CustomInput
@@ -47,6 +72,9 @@ const ForgotPasswordScreen = () => {
             }}
             placeholder="mail@example.com"
           />
+
+          {isLoading && <ActivityIndicator size="large" color="#008fff" />}
+
           <CustomSubmit
             label="Send reset link"
             onSubmit={handleSubmit(resetLink)}
