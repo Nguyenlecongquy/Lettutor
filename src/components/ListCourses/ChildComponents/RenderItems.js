@@ -3,22 +3,23 @@ import { View, StyleSheet, Image, Text, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 const RenderItems = (props) => {
-  data = props.data;
+  const data = props.data;
+  const numberOfTopic = data.topics.length
 
   const navigate = () => {
-    props.navigation.navigate("CourseDetailScreen");
+    props.navigation.navigate("CourseDetailScreen", {course: data});
   };
 
   return (
     <Pressable style={styles.container} onPress={navigate}>
-      <Image source={{ uri: data.image }} style={styles.image} />
+      <Image source={{ uri: data.imageUrl }} style={styles.image} />
       <View style={{ paddingLeft: 15 }}>
         <Text style={styles.name}>{data.name}</Text>
-        <Text style={styles.describe}>{data.describe}</Text>
+        <Text style={styles.describe}>{data.description}</Text>
         <View style={{ flexDirection: "row", marginBottom: 10 }}>
           <Text>{data.level}</Text>
           <Entypo name="dot-single" size={20} color="black" />
-          <Text>{data.numberOfLesson} Lessons</Text>
+          <Text> {numberOfTopic} Lessons</Text>
         </View>
       </View>
     </Pressable>

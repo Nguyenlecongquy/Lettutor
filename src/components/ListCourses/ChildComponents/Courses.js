@@ -4,96 +4,37 @@ import RenderItems from "./RenderItems";
 
 const Courses = (props) => {
   const [selected, setSelected] = useState("Course");
+  const listCourses = props.listCourses;
 
-  const DATA = [
+  let DATA = [
     {
       title: "English For Traveling",
-      data: [
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-      ],
+      data: [],
     },
     {
       title: "English For Beginners",
-      data: [
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-      ],
+      data: [],
     },
     {
       title: "Business English",
-      data: [
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-        {
-          name: "Life in the Internet Age",
-          image:
-            "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
-          describe: "Let's discuss how technology is changing the way we live",
-          level: "Intermediate",
-          numberOfLesson: 9,
-        },
-      ],
+      data: [],
     },
   ];
+
+  for (let i = 0; i < listCourses.length; i++) {
+    let course = listCourses[i];
+    console.log(course.categories[0].title);
+    if (course.categories.title == "English for Traveling") {
+      console.log("object");
+      DATA[0].data.push(course);
+    } else if (course.categories[0].title == "English for Beginners") {
+      DATA[1].data.push(course);
+    } else if (course.categories[0].title == "Business English") {
+      DATA[2].data.push(course);
+    } else {
+      console.log("abc");
+    }
+  }
 
   return (
     <View style={styles.container}>

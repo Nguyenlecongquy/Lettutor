@@ -19,7 +19,7 @@ const ListCoursesScreen = (props) => {
   let listCourses = props.route.params.listCourses.data
   let count = listCourses.count
   listCourses = listCourses.rows
-  console.log("listCourses", listCourses)
+  console.log("listCourses", count)
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

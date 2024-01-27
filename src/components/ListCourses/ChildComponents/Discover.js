@@ -3,18 +3,20 @@ import { View, StyleSheet, Image, Dimensions, Pressable, Text } from "react-nati
 
 const windowWidth = Dimensions.get("window").width;
 
-const Discover = () => {
+const Discover = (props) => {
+  let course = props.course
+
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: "https://camblycurriculumicons.s3.amazonaws.com/5e0e8b212ac750e7dc9886ac?h=d41d8cd98f00b204e9800998ecf8427e",
+          uri: course.imageUrl,
         }}
         style={styles.image}
       />
       <View style={{padding: 20}}>
-        <Text style={{ fontSize: 22, fontWeight: '500' }}>Life in the Internet Age</Text>
-        <Text style={{ marginVertical: 10 }}>Let's discuss how technology is changing the way we live</Text>
+        <Text style={{ fontSize: 22, fontWeight: '500' }}>{course.name}</Text>
+        <Text style={{ marginVertical: 10 }}>{course.description}</Text>
         <Pressable style={styles.button}>
             <Text style={styles.text}>Discover</Text>
         </Pressable>

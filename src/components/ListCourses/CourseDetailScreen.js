@@ -15,14 +15,16 @@ import Discover from "./ChildComponents/Discover";
 const windowHeight = Dimensions.get("window").height;
 
 const CourseDetailScreen = (props) => {
+  const course = props.route.params.course
+  
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
 
       <Header navigation={props.navigation}/>
       <ScrollView style={styles.body}>
-        <Discover/>
-        <Detail/>
+        <Discover course={course}/>
+        <Detail course={course}/>
       </ScrollView>
 
       <Gift />
