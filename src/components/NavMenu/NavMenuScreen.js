@@ -21,8 +21,10 @@ const windowHeight = Dimensions.get("window").height;
 
 const NavMenuScreen = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authentication.user.user)
-  console.log("user", user)
+  const userInfo = useSelector((state) => state.authentication.user)
+  const user = userInfo.user
+  const authToken = userInfo.tokens.access.token;
+  const authorization = "Bearer " + authToken;
 
   const moveToProfile = () => {
     props.navigation.navigate("ProfileScreen");
@@ -43,8 +45,18 @@ const NavMenuScreen = (props) => {
     props.navigation.navigate("HistoryScreen");
   };
 
-  const moveToCourses = () => {
-    props.navigation.navigate("ListCoursesScreen");
+  const moveToCourses = async () => {
+    let urlListCourses = "https://sandbox.api.lettutor.com/course?page=1&size=100"
+    let result = await fetch(urlListCourses, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: authorization,
+      },
+    })
+    result = await result.json();
+    console.log("result", result)
+    props.navigation.navigate("ListCoursesScreen", {listCourses: result});
   };
 
   const moveToMyCourses = () => {};

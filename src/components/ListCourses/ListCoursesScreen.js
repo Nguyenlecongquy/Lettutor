@@ -16,6 +16,11 @@ import Courses from "./ChildComponents/Courses";
 const windowHeight = Dimensions.get("window").height;
 
 const ListCoursesScreen = (props) => {
+  let listCourses = props.route.params.listCourses.data
+  let count = listCourses.count
+  listCourses = listCourses.rows
+  console.log("listCourses", listCourses)
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} backgroundColor={"white"} />
@@ -23,7 +28,7 @@ const ListCoursesScreen = (props) => {
       <Header navigation={props.navigation}/>
       <ScrollView style={styles.body}>
         <IntroAndSearch/>
-        <Courses navigation={props.navigation}/>
+        <Courses navigation={props.navigation} listCourses={listCourses}/>
         <PageSegmentation />
       </ScrollView>
 
